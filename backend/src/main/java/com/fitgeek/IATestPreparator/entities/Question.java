@@ -1,5 +1,6 @@
 package com.fitgeek.IATestPreparator.entities;
 
+import com.fitgeek.IATestPreparator.entities.enums.QuestionType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

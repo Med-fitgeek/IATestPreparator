@@ -1,11 +1,11 @@
 package com.fitgeek.IATestPreparator.entities;
 
+import com.fitgeek.IATestPreparator.entities.enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table(name = "quiz")
