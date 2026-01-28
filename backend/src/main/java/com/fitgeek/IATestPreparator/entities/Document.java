@@ -1,8 +1,9 @@
 package com.fitgeek.IATestPreparator.entities;
-import com.fitgeek.IATestPreparator.entities.enums.DocumentType;
 import com.fitgeek.IATestPreparator.entities.enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
@@ -11,6 +12,8 @@ import java.time.LocalDateTime;
 @Table(name = "documents")
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@Getter
 public class Document {
 
     @Id
@@ -19,13 +22,18 @@ public class Document {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     private User owner;
-    @Column(nullable = true)
+    @Column(nullable = true, length = 50)
     private String originalName;
     @Column(unique=true, nullable=false)
     private String storagePath;
     @Column(length=20)
-    private DocumentType documentType;
+    private String documentType;
     @Enumerated(EnumType.STRING)
     private Status status;
     private LocalDateTime uploadedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.uploadedAt = LocalDateTime.now();
+    }
 }
