@@ -1,6 +1,7 @@
 package com.fitgeek.IATestPreparator.config;
 
 import com.fitgeek.IATestPreparator.security.JwtAuthenticationFilter;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,7 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtFilter;
     private final UserDetailsService userDetailsService;
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
