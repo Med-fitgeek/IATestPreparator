@@ -11,7 +11,6 @@ import java.util.ArrayList;
 @Table(name = "users")
 @Builder
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
