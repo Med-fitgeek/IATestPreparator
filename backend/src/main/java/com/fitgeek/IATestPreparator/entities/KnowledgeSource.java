@@ -34,5 +34,8 @@ public class KnowledgeSource {
     private String storagePath;
 
     @Column(nullable = false)
+    private String checksum;
+
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 }
