@@ -38,4 +38,9 @@ public class KnowledgeSource {
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
+
+    @PrePersist
+    void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
 }
