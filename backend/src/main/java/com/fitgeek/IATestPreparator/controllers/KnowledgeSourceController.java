@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,9 +27,9 @@ public class KnowledgeSourceController {
 
     private final KnowledgeSourceService knowledgeSourceService;
 
-    @PostMapping("/upload")
+    @PostMapping(value ="/upload", consumes = "multipart/form-data")
     public ResponseEntity<KnowledgeNormalizedResponseDto> uploadSource(
-            KnowledgeRequestDto requestDto,
+            @ModelAttribute KnowledgeRequestDto requestDto,
             @AuthenticationPrincipal UserDetails userDetails) throws IOException, NoSuchAlgorithmException {
 
         boolean hasDocument = requestDto.file() != null && !requestDto.file().isEmpty();
