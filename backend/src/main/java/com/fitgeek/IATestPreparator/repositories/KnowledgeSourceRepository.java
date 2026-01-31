@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface KnowledgeSourceRepository extends JpaRepository<KnowledgeSource, Long> {
 
-     Optional<KnowledgeSource> findByIdAndChecksum(Long id, String checksum);
+     Optional<KnowledgeSource> findByOwnerIdAndChecksum(Long ownerId, String checksum);
 }
