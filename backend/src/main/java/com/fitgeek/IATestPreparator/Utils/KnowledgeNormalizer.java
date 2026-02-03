@@ -1,7 +1,6 @@
 package com.fitgeek.IATestPreparator.Utils;
 
 import com.fitgeek.IATestPreparator.dtos.StrucuturedTextdto;
-import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.stereotype.Service;
 

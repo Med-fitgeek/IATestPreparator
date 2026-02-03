@@ -12,6 +12,7 @@ import com.fitgeek.IATestPreparator.excpetion.BusinessException;
 import com.fitgeek.IATestPreparator.repositories.KnowledgeSourceRepository;
 import com.fitgeek.IATestPreparator.repositories.UserRepository;
 import com.fitgeek.IATestPreparator.services.KnowledgeSourceService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class KnowledgeSourceServiceImpl implements KnowledgeSourceService {
 
     private final KnowledgeSourceRepository knowledgeSourceRepository;
@@ -36,10 +38,10 @@ public class KnowledgeSourceServiceImpl implements KnowledgeSourceService {
     @Override
     public KnowledgeNormalizedResponseDto createFromText(StrucuturedTextdto textDto, UserDetails userDetails) throws IOException {
 
-        String filename = textDto.subject();
-
         User owner = userRepository.findByEmail(userDetails.getUsername())
                 .orElseThrow(() -> new BusinessException("User not found"));
+
+        String filename = textDto.subject();
 
         //Checking if the file already exist even if the name changes
         String checksum = checksumService.calculateChecksumForDto(textDto);
@@ -73,6 +75,9 @@ public class KnowledgeSourceServiceImpl implements KnowledgeSourceService {
     @Override
     public KnowledgeNormalizedResponseDto createFromDocument(MultipartFile file, UserDetails userDetails) throws IOException, NoSuchAlgorithmException {
 
+        User owner = userRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new BusinessException("User not found"));
+
         if (file.isEmpty()) {
             throw new BusinessException("File is empty");
         }
@@ -83,8 +88,6 @@ public class KnowledgeSourceServiceImpl implements KnowledgeSourceService {
             throw new BusinessException("File type not supported");
         }
 
-        User owner = userRepository.findByEmail(userDetails.getUsername())
-                .orElseThrow(() -> new BusinessException("User not found"));
 
         String checksum = checksumService.calculateChecksumForDocument(file.getInputStream());
 

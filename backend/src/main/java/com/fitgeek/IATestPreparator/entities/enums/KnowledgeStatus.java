@@ -1,6 +1,6 @@
 package com.fitgeek.IATestPreparator.entities.enums;
 
-public enum Status {
+public enum KnowledgeStatus {
     UPLOADED,
     PROCESSING,
     READY,
