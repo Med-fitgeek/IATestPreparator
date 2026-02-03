@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "quiz_sessions")
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
@@ -41,5 +42,14 @@ public class QuizSession {
     @Column(nullable = false)
     private LocalDateTime startedAt;
 
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
+
     private LocalDateTime completedAt;
+
+    @PrePersist
+    public void onCreate(){
+        this.startedAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
 }
