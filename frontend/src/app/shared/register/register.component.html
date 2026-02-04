@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="form flex-col gap-5" style="max-width: 420px; margin: 0 auto;">
+    
+    <h1 class="title">Créer un compte</h1>
+    <p>Rejoins la plateforme et commence à générer tes quiz.</p>
+
+    <div class="card">
+      <!-- Alert error -->
+      <div *ngIf="errorMessage" class="alert alert-error">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Alert success -->
+      <div *ngIf="successMessage" class="alert alert-success">
+        {{ successMessage }}
+      </div>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+
+        <div class="flex flex-col gap-1">
+          <label for="username">Nom d'utilisateur</label>
+          <input id="username" type="text" formControlName="username" placeholder="ex: medoune" />
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label for="email">Email</label>
+          <input id="email" type="email" formControlName="email" placeholder="ex: medoune@mail.com" />
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label for="password">Mot de passe</label>
+          <input id="password" type="password" formControlName="password" placeholder="••••••••" />
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label for="confirmPassword">Confirmer le mot de passe</label>
+          <input id="confirmPassword" type="password" formControlName="confirmPassword" placeholder="••••••••" />
+        </div>
+
+        <button 
+          class="btn btn-primary" 
+          type="submit" 
+          [disabled]="registerForm.invalid || loading">
+          <span *ngIf="!loading">Créer le compte</span>
+          <span *ngIf="loading">Création...</span>
+        </button>
+        <p>Deja inscrit?  <span routerLink="/login" class="text-accent">Connectez-vous</span></p>
+      </form>
+    </div>
+
+  </div>
+</div>
